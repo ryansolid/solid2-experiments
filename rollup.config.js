@@ -1,6 +1,7 @@
 import resolve from "@rollup/plugin-node-resolve";
 import { babel } from "@rollup/plugin-babel";
 import terser from "@rollup/plugin-terser";
+import serve from "rollup-plugin-serve";
 
 const TERSER_OPTIONS = {
   module: true,
@@ -23,5 +24,8 @@ export default {
     }),
     resolve({ extensions: [".js", ".jsx", ".tsx", ".ts"] }),
     process.env.production && terser(TERSER_OPTIONS),
+    serve({
+      port: 3000,
+    }),
   ].filter(Boolean),
 };
