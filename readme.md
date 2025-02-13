@@ -1,8 +1,9 @@
-# Suspense Demo with Solid.js
+# Solid 2.0 Experiments
 
-```bash
-git clone https://github.com/devagrawal09/solid-suspense-demo-v2
-npm install
-npm run dev
+To serve as a basis for trying new Solid builds. Thanks to Dev for the original demo.
+
+```
+pnpm install
+pnpm dev
 npx serve
 ```
