@@ -22,7 +22,10 @@ export default {
         ["solid", { omitNestedClosingTags: true }],
       ],
     }),
-    resolve({ extensions: [".js", ".jsx", ".tsx", ".ts"] }),
+    resolve({ 
+      exportConditions: ["development"],
+      extensions: [".js", ".jsx", ".tsx", ".ts"]
+    }),
     process.env.production && terser(TERSER_OPTIONS),
     serve({
       port: 3000,

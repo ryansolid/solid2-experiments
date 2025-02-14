@@ -7,10 +7,7 @@ import {
   isStale,
   Suspense,
   ErrorBoundary,
-  lazy,
 } from "solid-js";
-
-const Lazy = lazy(() => import("./lazy.jsx"));
 
 function PhraseCounter() {
   console.log(`Rendering PhraseCounter`);
@@ -29,14 +26,11 @@ function PhraseCounter() {
   return (
     <Suspense fallback={<p>Loading phrase counter...</p>}>
       <h1>{hello()}</h1>
-      <div>
-        <Lazy greeting="Hello" />
-      </div>
       <button
         class="increment"
         onClick={() => setCount(count() + 1)}
         type="button"
-        style={{ opacity: isStale(phrase) ? 0.5 : 1 }}
+        style={{ opacity: isStale(upperPhrase) ? 0.5 : 1 }}
       >
         Clicks: {count()}
       </button>
@@ -60,7 +54,7 @@ function PhraseCounter() {
 
 function Message(props) {
   console.log(`Rendering <Message>`);
-  return <p>The message is: {props.text}</p>;
+  return <p style={{opacity: isStale(() => props.text) ? 0.5 : 1}}>The message is: {props.text}</p>;
 }
 
 const phrases = [
