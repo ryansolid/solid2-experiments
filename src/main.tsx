@@ -77,7 +77,7 @@ async function getPhrase(num) {
     console.log(`getPhrase throwing`);
     throw new Error(`Random async error`);
   }
-  return phrases[num];
+  return phrases[num] || "I'm out of phrases!";
 }
 
 async function getHello() {
