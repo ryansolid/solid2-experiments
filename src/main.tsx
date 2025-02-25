@@ -4,7 +4,7 @@ import {
   createAsync,
   createMemo,
   createEffect,
-  isStale,
+  isPending,
   Suspense,
   ErrorBoundary,
 } from "solid-js";
@@ -30,7 +30,7 @@ function PhraseCounter() {
         class="increment"
         onClick={() => setCount(count() + 1)}
         type="button"
-        style={{ opacity: isStale(upperPhrase) ? 0.5 : 1 }}
+        style={{ opacity: isPending(upperPhrase, false) ? 0.5 : 1 }}
       >
         Clicks: {count()}
       </button>
@@ -45,16 +45,16 @@ function PhraseCounter() {
         }}
       >
         <Suspense fallback={<p>Loading phrase...</p>}>
-          <Message text={upperPhrase()} />
+          <Message text={upperPhrase()} loading={isPending(upperPhrase)} />
         </Suspense>
       </ErrorBoundary>
     </Suspense>
   );
 }
 
-function Message(props) {
+function Message(props: { text: string, loading?: boolean }) {
   console.log(`Rendering <Message>`);
-  return <p style={{opacity: isStale(() => props.text) ? 0.5 : 1}}>The message is: {props.text}</p>;
+  return <p style={{opacity: props.loading ? 0.5 : 1}}>The message is: {props.text}</p>;
 }
 
 const phrases = [
